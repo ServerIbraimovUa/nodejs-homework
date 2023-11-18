@@ -9,17 +9,17 @@ router.get('/', ctrl.getAll);
 
 //          GET ID
 
-// router.get('/:contactId', ctrl.getContactById);
+router.get('/:contactId', ctrl.getContactById);
 
 //         POST
 router.post('/', ctrl.add);
 
 // // DELETE
 
-// router.delete('/:contactId', ctrl.deleteContact);
+router.delete('/:contactId', ctrl.deleteContact);
 
 // //             PUT
 
-// router.put('/:contactId', ctrl.updateContact);
+router.put('/:contactId', ctrl.updateContact);
 
 module.exports = router;
