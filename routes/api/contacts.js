@@ -6,6 +6,7 @@ const { validateBody, isValidId } = require('../../middlewares');
 const {
   addSchema,
   updateFavoriteSchema,
+  updateSchema,
 } = require('../../schemas/contactSchema');
 
 //          GET
@@ -28,7 +29,7 @@ router.delete('/:contactId', isValidId, ctrl.deleteContact);
 router.put(
   '/:contactId',
   isValidId,
-  validateBody(addSchema),
+  validateBody(updateSchema),
   ctrl.updateContact
 );
 
