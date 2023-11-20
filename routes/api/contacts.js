@@ -3,7 +3,11 @@ const router = express.Router();
 
 const ctrl = require('../../controllers/contacts');
 const { validateBody, isValidId } = require('../../middlewares');
-const { addSchema, updateFavoriteSchema } = require('../../schemas/schemas');
+const {
+  addSchema,
+  updateFavoriteSchema,
+  updateSchema,
+} = require('../../schemas/schemas');
 
 //          GET
 
@@ -25,7 +29,7 @@ router.delete('/:contactId', isValidId, ctrl.deleteContact);
 router.put(
   '/:contactId',
   isValidId,
-  validateBody(addSchema),
+  validateBody(updateSchema),
   ctrl.updateContact
 );
 
