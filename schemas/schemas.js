@@ -8,6 +8,7 @@ const addSchema = Joi.object({
   email: Joi.string()
     .min(6)
     .email()
+    .required()
     .messages({ 'any.required': 'missing required email field' }),
   phone: Joi.string()
     .required()
