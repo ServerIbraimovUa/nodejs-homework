@@ -3,7 +3,10 @@ const router = express.Router();
 
 const ctrl = require('../../controllers/contacts');
 const { validateBody, isValidId } = require('../../middlewares');
-const { addSchema, updateFavoriteSchema } = require('../../schemas/schemas');
+const {
+  addSchema,
+  updateFavoriteSchema,
+} = require('../../schemas/contactSchema');
 
 //          GET
 
