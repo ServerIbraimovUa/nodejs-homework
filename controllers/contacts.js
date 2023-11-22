@@ -4,9 +4,25 @@ const Contact = require('../models/contact');
 //  get all contacts
 
 const getAll = async (req, res) => {
-  const contactList = await Contact.find({}, '-createdAt -updatedAt');
+  const { _id: owner } = req.user;
+  const { page = 1, limit = 10, favorite } = req.query;
+  const skip = (page - 1) * limit;
+  const query = { owner, ...(favorite ? { favorite: true } : {}) };
+  const contactList = await Contact.find(query, '-createdAt -updatedAt', {
+    skip,
+    limit,
+  }).populate('owner', 'email');
 
-  res.json(contactList);
+  const newSesult =
+    contactList.length === 0
+      ? {
+          result: [],
+          page: 0,
+          limit: 0,
+        }
+      : { result: contactList, page, limit };
+
+  res.json(newSesult);
 };
 
 // get contact by id
@@ -28,7 +44,8 @@ const getContactById = async (req, res) => {
 // add a new contact
 
 const add = async (req, res) => {
-  const newContact = await Contact.create(req.body);
+  const { _id: owner } = req.user;
+  const newContact = await Contact.create({ ...req.body, owner });
   res.status(201).json(newContact);
 };
 
