@@ -8,6 +8,16 @@ const ctrl = require('../../controllers/auth');
 
 router.post('/register', validateBody(schemas.registerSchema), ctrl.register);
 
+// verify the user
+
+router.get('/verify/:verificationToken', ctrl.verifyEmail);
+
+router.post(
+  '/verify/',
+  validateBody(schemas.emailSchema),
+  ctrl.resendVerifyEmail
+);
+
 // Login the user
 router.post('/login', validateBody(schemas.loginSchema), ctrl.login);
 
